@@ -5,6 +5,13 @@
   background-position: center;
 }
 
+/* capturing small screens because background-attachment: fixed doesn't work right on iOS */
+@media only screen and (max-device-width: 1024px) {
+  .img-jumbotron {
+    background-attachment: scroll;
+  }
+}
+
 #main-jumbotron {
   background-image: url('/assets/family.jpg');
 }
