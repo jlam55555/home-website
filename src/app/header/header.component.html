@@ -11,12 +11,12 @@
 
     <!-- link to homepage -->
     <div class='navbar-item'>
-      <a class='nav-link' routerLink='/'>Home</a>
+      <a [ngClass]='{ "nav-link": true, "active": page === "home" }' routerLink='/'>Home</a>
     </div>
 
     <!-- link to cookbook -->
     <div class='navbar-item'>
-      <a class='nav-link' routerLink='/cookbook'>Cookbook</a>
+      <a [ngClass]='{ "nav-link": true, "active": page === "cookbook" }' routerLink='/cookbook'>Cookbook</a>
     </div>
 
   </div>
