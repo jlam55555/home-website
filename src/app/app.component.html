@@ -1,25 +1,5 @@
-<!-- nav bar -->
-<nav class='navbar navbar-expand bg-dark navbar-dark fixed-top'>
+<!-- navigation bar -->
+<app-header></app-header>
 
-  <!-- name of website -->
-  <span class='navbar-text float-left mx-2'>
-    #LamFam
-  </span>
-
-  <!-- navigation links -->
-  <div class='navbar-nav'>
-
-    <!-- link to homepage -->
-    <div class='navbar-item'>
-      <a class='nav-link' routerLink='/'>Home</a>
-    </div>
-
-    <!-- link to cookbook -->
-    <div class='navbar-item'>
-      <a class='nav-link' routerLink='/cookbook'>Cookbook</a>
-    </div>
-
-  </div>
-</nav>
-
+<!-- page content -->
 <router-outlet></router-outlet>
