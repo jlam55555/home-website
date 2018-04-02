@@ -9,7 +9,7 @@ import { PageService } from '../page.service';
 export class HeaderComponent implements OnInit {
 
   // title (get from title service)
-  public title: String;
+  public page: String;
 
   constructor(private pageService: PageService) { }
 

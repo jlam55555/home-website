@@ -7,7 +7,7 @@ export class PageService {
   constructor() { }
 
   private page: String;
-  private pageObservable: BehaviorSubject<String> = new BehaviorSubject<>(null);
+  private pageObservable: BehaviorSubject<String> = new BehaviorSubject<String>(null);
 
   public getPage() {
     return this.pageObservable;
