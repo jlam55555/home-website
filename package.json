@@ -27,7 +27,8 @@
     "jquery": "^3.3.1",
     "popper.js": "^1.14.1",
     "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19"
+    "zone.js": "^0.8.19",
+    "postcss": "5.2.18"
   },
   "devDependencies": {
     "@angular/cli": "1.6.5",
