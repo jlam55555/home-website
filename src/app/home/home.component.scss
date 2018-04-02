@@ -1,9 +1,15 @@
-#mainJumbotron {
+.img-jumbotron {
   min-height: 40em;
-  background-image: url('/assets/family.jpg');
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
+}
+
+#main-jumbotron {
+  background-image: url('/assets/family.jpg');
+}
+#footer-jumbotron {
+  background-image: url('/assets/qinmin2018.jpg');
 }
 
 .row {
