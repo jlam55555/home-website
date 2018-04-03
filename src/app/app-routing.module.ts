@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'cookbook', component: CookbookComponent },
   { path: 'who', component: PersonComponent },
-  { path: 'who/:person', component: PersonComponent },
+  { path: 'who/:name', component: PersonComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

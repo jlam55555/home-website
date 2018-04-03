@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { PageService } from '../page.service';
 
 @Component({
@@ -8,10 +9,15 @@ import { PageService } from '../page.service';
 })
 export class PersonComponent implements OnInit {
 
-  constructor(private pageService: PageService) { }
+  constructor(private pageService: PageService, private activatedRoute: ActivatedRoute) { }
+
+  public name: String;
 
   ngOnInit() {
     this.pageService.setPage('person');
+
+    // get name
+    this.activatedRoute.params.subscribe(params => this.name = params.name);
   }
 
 }
