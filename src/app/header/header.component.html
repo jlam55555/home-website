@@ -10,13 +10,27 @@
   <div class='navbar-nav'>
 
     <!-- link to homepage -->
-    <div class='navbar-item'>
+    <div class='nav-item'>
       <a [ngClass]='{ "nav-link": true, "active": page === "home" }' routerLink='/'>Home</a>
     </div>
 
     <!-- link to cookbook -->
-    <div class='navbar-item'>
+    <div class='nav-item'>
       <a [ngClass]='{ "nav-link": true, "active": page === "cookbook" }' routerLink='/cookbook'>Cookbook</a>
+    </div>
+
+    <!-- links to people -->
+    <div class='nav-item dropdown'>
+      <a [ngClass]='{ "nav-link dropdown-toggle": true, "active": page === "person" }' routerLink='/who' data-toggle='dropdown'>
+        People
+      </a>
+      <div class='dropdown-menu'>
+        <a class='dropdown-item' routerLink='/who/parents'>Wang and Cynthia Lam</a>
+        <a class='dropdown-item' routerLink='/who/jessica'>Jessica Lam</a>
+        <a class='dropdown-item' routerLink='/who/jonathan'>Jonathan Lam</a>
+        <a class='dropdown-item' routerLink='/who/juliet'>Juliet Lam</a>
+        <a class='dropdown-item' routerLink='/who/cats'>Sharon and Jane</a>
+      </div>
     </div>
 
   </div>

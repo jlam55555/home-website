@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 // specific page components
 import { HomeComponent } from './home/home.component';
 import { CookbookComponent } from './cookbook/cookbook.component';
+import { PersonComponent } from './person/person.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
@@ -21,7 +22,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HomeComponent,
     CookbookComponent,
     PageNotFoundComponent,
-    HeaderComponent
+    HeaderComponent,
+    PersonComponent
   ],
   imports: [
     BrowserModule,
