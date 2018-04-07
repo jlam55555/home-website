@@ -1,8 +1,10 @@
+@import '../_mixins.scss';
+
 .img-jumbotron {
-  min-height: 40em;
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
+  @include jumbotron-height();
 }
 
 /* capturing small screens because background-attachment: fixed doesn't work right on iOS */

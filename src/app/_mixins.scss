@@ -1,0 +1,10 @@
+@mixin jumbotron-height() {
+  height: 40em;
+  @media only screen and (max-height: 750px) { height: 450px; }
+  @media only screen and (max-height: 500px) { height: 225px; }
+}
+@mixin jumbotron-max-height() {
+  max-height: 40em;
+  @media only screen and (max-height: 750px) { max-height: 450px; }
+  @media only screen and (max-height: 500px) { max-height: 225px; }
+}
