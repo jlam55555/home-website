@@ -4,7 +4,25 @@
 .carousel-inner, .carousel-item {
   height: 100%;
 }
-.carousel-image {
-  max-width: 100%;
-  max-height: 100%;
+.carousel-item {
+  align-items: center;
+  justify-content: center;
+
+  &.active, &.carousel-item-left, &.carousel-item-right {
+    display: flex;
+  }
+
+  .carousel-image {
+    max-width: 100%;
+    max-height: 40em;
+  }
+}
+
+@media only screen and (max-height: 750px) {
+  #personCarousel { height: 450px; }
+  .carousel-image { max-height: 450px; }
+}
+@media only screen and (max-height: 500px) {
+  #personCarousel { height: 225px; }
+  .carousel-image { max-height: 225px; }
 }

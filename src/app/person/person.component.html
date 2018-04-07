@@ -15,7 +15,7 @@
       </ol>
       <div class='carousel-inner'>
         <div *ngFor='let image of personImages; index as i' [ngClass]='{ "carousel-item bg-dark": true, "active": i === 0 }'>
-          <img class='d-block carousel-image mx-auto' src='{{ image.path }}' alt='{{ image.description }}'>
+          <img class='d-block carousel-image' src='{{ image.path }}' alt='{{ image.description }}'>
           <div class='carousel-caption d-none d-md-block'>Tagged: <a routerLink='/gallery/{{ image.tag }}' class='text-white'>{{ image.tag }}</a></div>
         </div>
       </div>
