@@ -3,9 +3,31 @@
   <div class='jumbotron jumbotron-fluid'>
     <div class='container'>
       <h1>{{ person.name || 'Select a person' }}</h1>
-      <p class='text-secondary'>{{ person.shortDescription }}</p>
+      <p class='text-secondary'>{{ person.shortDescription || '< s e c r e t i v e n i n j a >' }}</p>
     </div>
   </div>
+  <div class='container'>
+    <p>{{ person.description || '<< s u p e r s e c r e t i v e n i n j a >>' }}</p>
+  </div>
+    <div id='personCarousel' class='jumbotron jumbotron-fluid p-0 carousel slide' data-ride='carousel'>
+      <ol class='carousel-indicators' *ngIf='personImages.length > 1'>
+        <li data-target='#personCarousel' *ngFor='let image of personImages; index as i' [ngClass]='{ "active": i === 0 }' attr.data-slide-to='{{ i }}'></li>
+      </ol>
+      <div class='carousel-inner'>
+        <div *ngFor='let image of personImages; index as i' [ngClass]='{ "carousel-item bg-dark": true, "active": i === 0 }'>
+          <img class='d-block carousel-image mx-auto' src='{{ image.path }}' alt='{{ image.description }}'>
+          <div class='carousel-caption d-none d-md-block'>Tagged: <a routerLink='/gallery/{{ image.tag }}' class='text-white'>{{ image.tag }}</a></div>
+        </div>
+      </div>
+      <a class='carousel-control-prev' href='#personCarousel' role='button' data-slide='prev' *ngIf='personImages.length > 1'>
+        <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+        <span class='sr-only'>Previous</span>
+      </a>
+      <a class='carousel-control-next' href='#personCarousel' role='button' data-slide='next' *ngIf='personImages.length > 1'>
+        <span class='carousel-control-next-icon' aria-hidden='true'></span>
+        <span class='sr-only'>Next</span>
+      </a>
+    </div>
   <div class='container'>
     <p class='text-right'>Return to the <a routerLink='/'>homepage</a>.</p>
   </div>
