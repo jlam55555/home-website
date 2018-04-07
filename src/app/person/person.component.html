@@ -1,6 +1,13 @@
-<div class='jumbotron jumbotron-fluid'>
+<!-- if person is found -->
+<div class='jumbotron jumbotron-fluid' *ngIf='person !== undefined'>
   <div class='container'>
-    <h1>{{name || 'Select a person'}}</h1>
-    <p class='text-secondary'>Coming soon</p>
+    <h1>{{ person.name || 'Select a person' }}</h1>
+    <p class='text-secondary'>{{ person.description }}</p>
   </div>
+</div>
+
+<!-- if person isn't found -->
+<div class='container my-5' *ngIf='person === undefined'>
+  <h1>Sorry, we must have vaporized that person.</h1>
+  <p class='text=secondary'>Oops. Want to return to the <a routerLink='/'>homepage</a>?</p>
 </div>
