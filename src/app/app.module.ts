@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { CookbookComponent } from './cookbook/cookbook.component';
 import { PersonComponent } from './person/person.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ServerService } from './server.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AppRoutingModule
   ],
   providers: [
-    PageService
+    PageService,
+    ServerService
   ],
   bootstrap: [AppComponent]
 })

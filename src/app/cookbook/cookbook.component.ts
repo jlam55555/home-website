@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageService } from '../page.service';
+import { ServerService } from '../server.service';
 
 @Component({
   selector: 'app-cookbook',
@@ -8,7 +9,7 @@ import { PageService } from '../page.service';
 })
 export class CookbookComponent implements OnInit {
 
-  constructor(private pageService: PageService) { }
+  constructor(private pageService: PageService, private serverService: ServerService) { }
 
   ngOnInit() {
     this.pageService.setPage('cookbook');
