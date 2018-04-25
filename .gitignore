@@ -1,8 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# build script
-build
-build.bat
+# build scripts
+build*
 
 # compiled output
 /dist
