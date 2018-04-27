@@ -8,6 +8,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'cookbook', component: CookbookComponent },
+  { path: 'cookbook/create', component: CookbookComponent, data: { create: true } },
+  { path: 'cookbook/:recipe', component: CookbookComponent },
   { path: 'who', component: PersonComponent },
   { path: 'who/:name', component: PersonComponent },
   { path: '**', component: PageNotFoundComponent },

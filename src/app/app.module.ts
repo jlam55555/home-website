@@ -1,6 +1,7 @@
 // module deps
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 // services and routing modules
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +29,7 @@ import { ServerService } from './server.service';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [

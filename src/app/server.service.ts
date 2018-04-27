@@ -10,4 +10,9 @@ export class ServerService {
     this.socket = io();
   }
 
+  // get recipe by name
+  public getRecipe(data: any, callback: Function): void {
+    this.socket.emit('getRecipe', data, callback);
+  }
+
 }

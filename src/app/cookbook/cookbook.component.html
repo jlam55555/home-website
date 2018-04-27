@@ -1,6 +1,119 @@
-<div class='jumbotron jumbotron-fluid'>
-  <div class='container'>
-    <h1>Cookbook</h1>
-    <p class='text-secondary'>Coming soon</p>
+<div class='container'>
+  <h1>Cookbook</h1>
+
+  <!-- to create a recipe -->
+  <div *ngIf='isCreateMode'>
+
+    <h4>Create a recipe</h4>
+    <!-- link back to recipe list -->
+    <a routerLink='/cookbook'>Return to recipe list?</a>
+
+    <form>
+      <div class='form-group'>
+        <label for='createName'>Recipe name</label>
+        <input
+          class='form-control is-invalid'
+          type='text'
+          maxlength='64'
+          placeholder='Rainbow Truffles'
+          id='createName'
+          name='createName'
+          [(ngModel)]='createName'>
+        <small class='form-text invalid-feedback'>Test error</small>
+      </div>
+      <div class='form-group'>
+        <label for='createDescription'>Recipe description</label>
+        <textarea
+          class='form-control is-invalid'
+          type='text'
+          maxlength='512'
+          rows='5'
+          placeholder='The most scrumptious, colorful chocolates ever! They have a hint of magical fairy dust from Neverland for splendor.'
+          id='createDescription'
+          name='createDescription'
+          [(ngModel)]='createDescription'></textarea>
+        <small class='form-text invalid-feedback'>Test error</small>
+      </div>
+      <div class='form-group'>
+        <label for='createRefUrl'>Link to recipe</label>
+        <input
+          class='form-control is-invalid'
+          type='url'
+          maxlength='512'
+          placeholder='https://www.rainbow-truffles.com/secret-recipe.html'
+          id='createRefUrl'
+          name='createRefurl'
+          [(ngModel)]='createRefUrl'>
+        <small class='form-text invalid-feedback'>Test error</small>
+      </div>
+      <div class='form-group'>
+        <label>Ingredients</label>
+        <div class='form-row mb-3' *ngFor='let ingredient of createIngredients; let i = index'>
+          <div class='col-3 col-md-1'>
+            <input
+              class='form-control is-invalid'
+              type='number'
+              maxlength='5'
+              placeholder='5'
+              name='ingredient.amount{{i}}'
+              [(ngModel)]='ingredient.amount'>
+          </div>
+          <div class='col-3 col-md-1'>
+            <select
+              class='form-control custom-select is-invalid'
+              type='string'
+              maxlength='5'
+              placeholder='count'
+              name='createIngredientUnit{{i}}'
+              [(ngModel)]='ingredient.unit'>
+              <option *ngFor='let option of options' [value]='option.value'>{{ option.text }}</option>
+            </select>
+          </div>
+          <div class='col-6 col-md-10'>
+            <input
+              class='form-control is-invalid'
+              type='text'
+              maxlength='64'
+              placeholder='jumbo egg'
+              name='createIngredientName{{i}}'
+              [(ngModel)]='ingredient.name'>
+          </div>
+        </div>
+        <small class='form-text invalid-feedback'>Test error</small>
+      </div>
+      <div class='form-group'>
+        <input class='btn btn-primary' type='button' value='Create new recipe'>
+        <input class='btn btn-warning' type='button' routerlink='/cookbook' value='Cancel'>
+      </div>
+    </form>
   </div>
+
+  <!-- if recipe set in url -->
+  <div *ngIf='!isCreateMode && recipePath !== undefined'>
+
+    <!-- link back to recipe list -->
+    <a routerLink='/cookbook'>Return to recipe list?</a>
+
+    <!-- if recipe found -->
+    <div *ngIf='recipe !== null'>
+      {{ recipe.name }}
+      {{ recipe.description }}
+      {{ recipe.images }}
+      {{ recipe.refUrl }}
+      {{ recipe.ingredients }}
+      {{ recipe.instructions }}
+    </div>
+
+    <!-- if recipe not found -->
+    <div *ngIf='recipe === null'>
+      <p>The linked recipe was not found.</p>
+    </div>
+  </div>
+
+  <!-- if no recipe set in url -->
+  <div *ngIf='!isCreateMode && recipePath === undefined'>
+    <p>List of recipes coming soon.</p>
+    <p><button class='btn btn-outline-primary' routerLink='/cookbook/create'>Create a recipe</button></p>
+  </div>
+
 </div>
