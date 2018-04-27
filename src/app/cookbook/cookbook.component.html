@@ -1,30 +1,32 @@
-<div class='container'>
-  <h1>Cookbook</h1>
-
+<div class='container pt-5'>
   <!-- to create a recipe -->
   <div *ngIf='isCreateMode'>
 
     <h4>Create a recipe</h4>
     <!-- link back to recipe list -->
-    <a routerLink='/cookbook'>Return to recipe list?</a>
+    <a routerLink='/cookbook'>Discard and return to recipe list?</a>
 
-    <form>
+    <form class='mt-3'>
+
+      <!-- recipe name -->
       <div class='form-group'>
         <label for='createName'>Recipe name</label>
         <input
-          class='form-control is-invalid'
+          [ngClass]='{ "form-control": true, "is-invalid": errors.name !== undefined }'
           type='text'
           maxlength='64'
           placeholder='Rainbow Truffles'
           id='createName'
           name='createName'
           [(ngModel)]='createName'>
-        <small class='form-text invalid-feedback'>Test error</small>
+        <small class='form-text invalid-feedback'>{{ errors.name }}</small>
       </div>
+
+      <!-- recipe description -->
       <div class='form-group'>
         <label for='createDescription'>Recipe description</label>
         <textarea
-          class='form-control is-invalid'
+          [ngClass]='{ "form-control": true, "is-invalid": errors.description !== undefined }'
           type='text'
           maxlength='512'
           rows='5'
@@ -32,64 +34,152 @@
           id='createDescription'
           name='createDescription'
           [(ngModel)]='createDescription'></textarea>
-        <small class='form-text invalid-feedback'>Test error</small>
+        <small class='form-text invalid-feedback'>{{ errors.description }}</small>
       </div>
+
+      <!-- link to recipe -->
       <div class='form-group'>
-        <label for='createRefUrl'>Link to recipe</label>
+        <label for='createRefUrl'>Link to recipe <small class='form-text text-secondary d-inline'>(optional)</small></label>
         <input
-          class='form-control is-invalid'
+          [ngClass]='{ "form-control": true, "is-invalid": errors.refUrl !== undefined }'
           type='url'
           maxlength='512'
           placeholder='https://www.rainbow-truffles.com/secret-recipe.html'
           id='createRefUrl'
           name='createRefurl'
           [(ngModel)]='createRefUrl'>
-        <small class='form-text invalid-feedback'>Test error</small>
+        <small class='form-text invalid-feedback'>{{ errors.refUrl }}</small>
       </div>
+
+      <!-- ingredients -->
       <div class='form-group'>
+
+        <!-- show list of current ingredients -->
         <label>Ingredients</label>
         <div class='form-row mb-3' *ngFor='let ingredient of createIngredients; let i = index'>
-          <div class='col-3 col-md-1'>
+          <div class='col-6 col-md-1'>
             <input
-              class='form-control is-invalid'
+              class='form-control mb-3'
               type='number'
               maxlength='5'
               placeholder='5'
+              min='0'
               name='ingredient.amount{{i}}'
               [(ngModel)]='ingredient.amount'>
           </div>
-          <div class='col-3 col-md-1'>
+          <div class='col-6 col-md-2'>
             <select
-              class='form-control custom-select is-invalid'
+              class='form-control mb-3 custom-select'
               type='string'
               maxlength='5'
-              placeholder='count'
               name='createIngredientUnit{{i}}'
               [(ngModel)]='ingredient.unit'>
-              <option *ngFor='let option of options' [value]='option.value'>{{ option.text }}</option>
+              <option *ngFor='let option of options; let j = index' [value]='option.value' [selected]='j === 0'>{{ option.text }}</option>
             </select>
           </div>
-          <div class='col-6 col-md-10'>
+          <div class='col-10 col-md-8'>
             <input
-              class='form-control is-invalid'
+              class='form-control'
               type='text'
               maxlength='64'
               placeholder='jumbo egg'
               name='createIngredientName{{i}}'
               [(ngModel)]='ingredient.name'>
           </div>
+          <div class='col-2 col-md-1'>
+            <button class='btn btn-danger rounded w-100' (click)='removeIngredient(i)'>&times;</button>
+          </div>
         </div>
-        <small class='form-text invalid-feedback'>Test error</small>
+
+        <!-- create new ingredient -->
+        <div class='form-row mb-3'>
+          <div class='col-6 col-md-1'>
+            <input
+              class='form-control mb-3'
+              type='number'
+              maxlength='5'
+              placeholder='5'
+              min='0'
+              name='createNewIngredient.amount'
+              [(ngModel)]='createNewIngredient.amount'>
+          </div>
+          <div class='col-6 col-md-2'>
+            <select
+              class='form-control mb-3 custom-select'
+              type='string'
+              maxlength='5'
+              placeholder='count'
+              name='createNewIngredient.unit'
+              [(ngModel)]='createNewIngredient.unit'>
+              <option *ngFor='let option of options' [value]='option.value'>{{ option.text }}</option>
+            </select>
+          </div>
+          <div class='col-10 col-md-8'>
+            <input
+              class='form-control'
+              type='text'
+              maxlength='64'
+              placeholder='jumbo egg'
+              name='createNewIngredient.name'
+              [(ngModel)]='createNewIngredient.name'>
+          </div>
+          <div class='col-2 col-md-1'>
+            <button class='btn btn-success rounded w-100' (click)='addIngredient()'>+</button>
+          </div>
+        </div>
+        <p><small class='form-text text-danger'>{{ errors.ingredients }}</small></p>
       </div>
+
+      <!-- recipe instructions -->
       <div class='form-group'>
-        <input class='btn btn-primary' type='button' value='Create new recipe'>
-        <input class='btn btn-warning' type='button' routerlink='/cookbook' value='Cancel'>
+        <label>Instructions</label>
+
+        <!-- list of existing ingredients -->
+        <div class='form-row mb-3' *ngFor='let instruction of createInstructions; let i = index'>
+          <div class='col-10 col-md-11'>
+            <input
+              class='form-control'
+              type='text'
+              maxlength='512'
+              placeholder='Preheat oven to 512 degrees Fahrenheit.'
+              name='instruction{{i}}'
+              [(ngModel)]='createInstructions[i].value'>
+          </div>
+          <div class='col-2 col-md-1'>
+            <button class='btn btn-danger rounded w-100' (click)='removeInstruction(i)'>&times;</button>
+          </div>
+        </div>
+
+        <!-- create a new ingredient (same format) -->
+        <div class='form-row mb-3'>
+          <div class='col-10 col-md-11'>
+            <input
+              class='form-control'
+              type='text'
+              maxlength='512'
+              placeholder='Preheat oven to 512 degrees Fahrenheit.'
+              name='createNewInstruction'
+              [(ngModel)]='createNewInstruction'>
+          </div>
+          <div class='col-2 col-md-1'>
+            <button class='btn btn-success rounded w-100' (click)='addInstruction()'>+</button>
+          </div>
+        </div>
+        <p><small class='form-text text-danger'>{{ errors.instructions }}</small></p>
+      </div>
+
+      <!-- submit or cancel -->
+      <div class='form-group'>
+        <input class='btn btn-primary' type='button' value='Create new recipe' (click)='createRecipe()'>
+        <input class='btn btn-warning' type='button' routerLink='/cookbook' value='Discard'>
       </div>
     </form>
   </div>
 
   <!-- if recipe set in url -->
   <div *ngIf='!isCreateMode && recipePath !== undefined'>
+
+    <h4>{{ recipe !== null ? (recipe.name || 'Recipe not found') : 'Recipe not found' }}</h4>
 
     <!-- link back to recipe list -->
     <a routerLink='/cookbook'>Return to recipe list?</a>
@@ -112,6 +202,9 @@
 
   <!-- if no recipe set in url -->
   <div *ngIf='!isCreateMode && recipePath === undefined'>
+  
+    <h4>Cookbook</h4>
+
     <p>List of recipes coming soon.</p>
     <p><button class='btn btn-outline-primary' routerLink='/cookbook/create'>Create a recipe</button></p>
   </div>
