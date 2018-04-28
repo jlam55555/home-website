@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import * as io from 'socket.io-client';
 
 // this class simply serves to handle requests to and from the server
@@ -11,9 +12,11 @@ export class ServerService {
     this.socket = io();
   }
 
-  // get recipe by name
-  public getRecipe(data: any, callback: Function): void {
-    this.socket.emit('getRecipe', data, callback);
+  // get all recipes
+  private recipesSubject: BehaviorSubject<Recipe[]> = new BehaviorSubject<Recipe[]>([]);
+  public getRecipes(): BehaviorSubject<Recipes[]> {
+    this.socket.emit('getRecipes', res => this.recipesSubject.next(res));
+    return this.recipesSubject;
   }
 
   // create recipe

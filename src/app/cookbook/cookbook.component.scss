@@ -1,0 +1,8 @@
+@import '../_mixins.scss';
+
+#recipeJumbotron {
+  @include jumbotron-height();
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}

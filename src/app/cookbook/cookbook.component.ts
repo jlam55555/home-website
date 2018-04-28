@@ -19,7 +19,8 @@ export class CookbookComponent implements OnInit {
   // recipe path
   public recipePath: string = undefined;
 
-  // recipe
+  // all recipes and selected one
+  public recipes: Recipes[] = [];
   public recipe: Recipe = null;
 
   // create mode
@@ -108,11 +109,16 @@ export class CookbookComponent implements OnInit {
       description: this.createDescription,
       refUrl: this.createRefUrl,
       ingredients: this.createIngredients,
-      instructions: this.createInstructions
+      instructions: this.createInstructions.map(instruction => instruction.value)
       // add images too soon
     };
     this.serverService.createRecipe(data, res => {
-      console.log(res);
+      if(res !== true) {
+        this.errors = res;
+      } else {
+        this.errors = {};
+        console.log('created! yay!');
+      }
     });
   }
 
@@ -122,7 +128,13 @@ export class CookbookComponent implements OnInit {
     // keep recipe updated
     this.activatedRoute.params.subscribe(params => {
       this.recipePath = params.recipe;
-      this.serverService.getRecipe({ path: params.recipe }, res => this.recipe = res );
+      this.recipe = this.recipes.find(recipe => recipe.path === this.recipePath) || null;
+    });
+
+    // keep list of recipes updated
+    this.serverService.getRecipes().subscribe(newRecipes => {
+      this.recipes = newRecipes;
+      this.recipe = this.recipes.find(recipe => recipe.path === this.recipePath) || null;
     });
 
     // keep create mode updated
