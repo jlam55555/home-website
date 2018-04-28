@@ -20,7 +20,7 @@ export class CookbookComponent implements OnInit {
   public recipePath: string = undefined;
 
   // all recipes and selected one
-  public recipes: Recipes[] = [];
+  public recipes: Recipe[] = [];
   public recipe: Recipe = null;
 
   // create mode

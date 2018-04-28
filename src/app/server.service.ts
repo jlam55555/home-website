@@ -14,7 +14,7 @@ export class ServerService {
 
   // get all recipes
   private recipesSubject: BehaviorSubject<Recipe[]> = new BehaviorSubject<Recipe[]>([]);
-  public getRecipes(): BehaviorSubject<Recipes[]> {
+  public getRecipes(): BehaviorSubject<Recipe[]> {
     this.socket.emit('getRecipes', res => this.recipesSubject.next(res));
     return this.recipesSubject;
   }

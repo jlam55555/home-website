@@ -5,6 +5,7 @@ interface NodeModule {
 }
 interface Recipe {
   name: string;
+  path: string;
   description: string;
   images: string[];
   refUrl: string;
